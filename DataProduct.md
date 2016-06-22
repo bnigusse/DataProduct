@@ -1,7 +1,7 @@
 Dynamic Display of Plots using mtcars Dataset
 ===
 author: Nigusseba
-date: Tue Jun 21 22:13:19 2016
+date: Tue Jun 21 22:31:51 2016
 width: 1440
 height: 900
 font-family: 'Helvetica'
