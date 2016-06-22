@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>DataProuct Project</title>
+  <title>Dynamic Display of Plots using mtcars Dataset</title>
     
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -784,7 +784,7 @@ hljs.initHighlightingOnLoad();
   <div class="slides">
 
 <section data-state="section" data-transition="linear" data-transition-speed="default">
-<h1>DataProuct Project</h1><p>Nigusseba<br/>Mon Jun 20 22:45:28 2016</p>
+<h1>Dynamic Display of Plots using mtcars Dataset</h1><p>Nigusseba<br/>Tue Jun 21 22:31:51 2016</p>
 
 <div class="slideContent" >
 
@@ -792,13 +792,13 @@ hljs.initHighlightingOnLoad();
 
 </section>
 <section data-transition="default" data-transition-speed="default">
-<h3>Overview</h3>
+<h3>Overview of Shiny Datae Product</h3>
 <div class="slideContent" >
-<p>This project demonstrates dynamic prediction of fuel consumptions of motor vehicles in <strong><em>mpg</em></strong> for number of cylinders selected. The prediction model uses motor vehicles performance data set <strong>mtcars</strong> available in RStudio. The shiny data product allow users to do the following:</p>
+<p>This project demonstrates dynamic prediction of fuel consumptions of motor vehicles in <strong><em>mpg</em></strong> for number of cylinders selected by users. The prediction model uses motor vehicles performance data set <strong>mtcars</strong> available in RStudio. The shiny data product demonstrates the following capabilities:</p>
 
 <ul>
 <li>Select the number of cyclinders</li>
-<li>Dynamically subset the dataset</li>
+<li>Dynamically subset the <strong>mtcars</strong> dataset</li>
 <li>Dynamicaly generate linear model</li>
 <li>Dynamiclly updates plots</li>
 </ul>
@@ -809,7 +809,7 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>Dynamically Subset DataSet and Fit Model</h3>
 <div class="slideContent" >
-<p>Shiny server dynamically subsets the <em>mtcars</em> dataset for a the number of cycliners specified. The number of cyclinders choices available are 4, 6, or 8. Radio buttons are used to switch between the number of cyclinders. The default value is 4. The reactive function allow dynamically updating the dataset as shown in the psudo code below.</p>
+<p>Shiny server dynamically subsets the <em>mtcars</em> dataset for a the number of cycliners specified. The number of cyclinders choices available are 4, 6, or 8. The radio buttons are used to switch between the number of cyclinders. The default choice is 4. The reactive function allow dynamically updating the dataset as shown in the psudo code below.</p>
 
 <pre><code class="r">NumOfCylinders &lt;- reactive({
 NumberOfCylinders &lt;- as.numeric(input$nCyl)
@@ -820,7 +820,7 @@ return(NumberOfCylinders) })
 subset(mtcars, mtcars$cyl==NumOfCylinders()) })
 </code></pre>
 
-<p>The model predicts fuel consumptions in <em>mpg</em> for the number of cycliners selected uding linear regression model and displays the plot dynamically. The reactive function is used to update the linear model.</p>
+<p>The model predicts fuel consumption of motor vehicles in <em>mpg</em> for the number of cycliners selected using linear regression model and displays the result as a plot dynamically. A reactive function is used to update the linear model whenever the user clickes the radio button.</p>
 
 <pre><code class="r">lmFit &lt;- reactive({
 regress.exp &lt;- &quot;mpg ~ .&quot;
