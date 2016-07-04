@@ -9,7 +9,7 @@ input <- list(rseed=1)
 shinyServer(  
     function(input, output,session) {
         
-        ## dynamically update the number cyclinders selected        
+        ## dynamically update the number cylinders selected        
         NumOfCylinders <- reactive({
             NumberOfCylinders <- as.numeric(input$nCyl)
             return(NumberOfCylinders)
@@ -17,12 +17,12 @@ shinyServer(
         
         output$outnCyl <- renderPrint({as.numeric(input$nCyl)})
 
-        ## dynamically subset the data set bsed on the number cyclinders selected
+        ## dynamically subset the data set bsed on the number cylinders selected
         mydf <- reactive({
             subset(mtcars, mtcars$cyl == NumOfCylinders())
         })
         
-        ## dynamically update the inear model fir coefficients
+        ## dynamically update the linear model fit coefficients
         lmFit <- reactive({
             regress.exp <- "mpg ~ ."
             lm(regress.exp, data=mydf())
@@ -65,24 +65,27 @@ shinyServer(
                 c(20, 36) 
             }
         })
+        
         ## dynamically update the scatter mpg plot
         output$scatterplot <- renderPlot({
-            par(mfrow=c(1,1), cex.main=2, cex.lab=2, cex.axis=2, mar=c(4,5,2,2) )
+            par(mfrow=c(1,1), cex.main=1.6, cex.lab=1.4, cex.axis=2, mar=c(4,5,2,2) )
             predicted = predict(lmFit())
+            heading <- paste("Miles per Gallon Comparison for ", sep=" ", NumOfCylinders(), "Cylinder Cars")
             plot(predicted ~ mydf()$mpg, 
-                 main="Miles per Gallon Comparison", xlab="Measured, mpg", ylab="Predicted, mpg", 
-                 pch=16, col="blue", bg="blue", cex=2.5, xlim=xlimts(), ylim=ylimts() )
-        }, height=400 )
+                 main=heading, xlab="Measured, mpg", ylab="Predicted, mpg", 
+                 pch=16, col="blue", bg="blue", cex=2.0, xlim=xlimts(), ylim=ylimts() )
+        }, height=380 )
         
         ## dynamically update the residual plot
         output$residualplot <- renderPlot({
-            par(mfrow=c(1,1), cex.main=2, cex.lab=2, cex.axis=2, mar=c(4,5,2,2) )
+            par(mfrow=c(1,1), cex.main=1.6, cex.lab=1.2, cex.axis=2, mar=c(4,5,2,2) )
             predicted = predict(lmFit())
             residual = mydf()$mpg - predicted
+            heading <- paste("Residuals versus Predicted for ", sep=" ", NumOfCylinders(), "Cylinder Cars")
             if(input$Show.Resid){
                 plot(residual ~ predicted, 
-                main="Residuals versus Predicted", xlab="Predicted, mpg", ylab="Residuals, mpg", 
-                pch=16, col = "blue", bg="blue", cex=2.5, xlim=xlimts(), ylim=c(-4, 4) )
+                main=heading, xlab="Predicted, mpg", ylab="Residuals, mpg", 
+                pch=16, col = "blue", bg="blue", cex=2.0, xlim=xlimts(), ylim=c(-4, 4) )
            }
-           }, height=400 )
+           }, height=380 )
 })

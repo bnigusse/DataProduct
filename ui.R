@@ -4,7 +4,7 @@ library(UsingR)
 shinyUI(pageWithSidebar(
     
     #  Application title
-    headerPanel("Motor Vehicle Performance"),
+    headerPanel("Motor Vehicle Performance Dynamic Display"),
     
     # Radio butten choices
     sidebarPanel(
@@ -17,7 +17,15 @@ shinyUI(pageWithSidebar(
         dateInput("date", "Enter Date:"),
         
         # checkbox input method
-        checkboxInput("Show.Resid", "Show Residual Plot", FALSE)
+        checkboxInput("Show.Resid", "Show Residual Plot", FALSE),
+        
+        #textInput(inputId="text1", label = "Documentation: "),
+
+        p(strong(em("Documentation:",a("Dynamic Display of Plots using mtcars Dataset",href="https://github.com/bnigusse/DataProduct/blob/gh-pages/README.md")))),
+        
+        p(strong(em("Github repository:",a("Data Products; Shiny App",href="https://github.com/bnigusse/DataProduct/tree/gh-pages"))))
+        
+        
         ),
     
 
